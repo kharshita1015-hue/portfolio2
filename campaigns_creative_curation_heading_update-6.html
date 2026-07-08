@@ -1,0 +1,2921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Harshita Kathuria — Creative Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Flat White Blend: Warm Medium (Default Vibe) */
+  --espresso: #241815;
+  --coffee: #3A2925;
+  --mocha: #5A4035;
+  --latte: #D8B99B;
+  --cream: #F8F4EE;
+  --copper: #B86A48;
+  --olive: #7D8068;
+  --paper: #FFFDF9;
+  --text: #2D221D;
+  --shadow: rgba(36, 24, 21, 0.1);
+  --shadow-strong: rgba(36, 24, 21, 0.2);
+  --radius: 18px;
+  --nav-bg: rgba(248, 244, 238, 0.96);
+  --sticky-bg: #FEF9D9;
+  --sticky-text: #2D221D;
+}
+
+/* Base & Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--cream);
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--latte);
+  border-radius: 5px;
+  border: 2px solid var(--cream);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mocha);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--latte);
+  color: var(--espresso);
+}
+
+/* Tactile Background Grid & Textures */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.25;
+  background-image: 
+    radial-gradient(rgba(36, 24, 21, 0.15) 1px, transparent 0),
+    radial-gradient(rgba(36, 24, 21, 0.08) 1.5px, transparent 0);
+  background-size: 32px 32px, 96px 96px;
+}
+
+/* Background Elements */
+.bg-doodles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.coffee-ring {
+  position: absolute;
+  border: 3px double var(--latte);
+  border-radius: 50%;
+  opacity: 0.12;
+  transform: rotate(-15deg);
+}
+
+/* Handwritten Stories Tag Override - Prevents Parent Syne/Bold Inheritance */
+.handwritten-arrow {
+  font-family: 'Space Mono', monospace !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: var(--copper) !important;
+  opacity: 0.9 !important;
+  white-space: nowrap !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.2 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+}
+
+/* Sticky Navigation Header with Name and Coffee Blendpill selector only */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--nav-bg);
+  backdrop-filter: blur(8px);
+  transition: background-color 0.4s ease;
+  border-bottom: 1px solid rgba(90, 64, 53, 0.1);
+  box-shadow: 0 4px 20px var(--shadow);
+  padding: 16px 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+  color: var(--espresso);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-logo::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--copper);
+}
+
+.nav-right-wrap {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Nav Links: only shown once the user has scrolled past the Curation Menu section */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.nav-links.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.nav-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mocha);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.25s ease, color 0.4s ease;
+}
+.nav-links a:hover {
+  opacity: 1;
+  color: var(--copper);
+}
+
+/* Interactive Blend Switcher Pill */
+.blend-selector-pill {
+  display: flex;
+  background-color: rgba(36, 24, 21, 0.05);
+  padding: 4px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(36, 24, 21, 0.1);
+  gap: 2px;
+}
+
+.blend-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  color: var(--espresso);
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.25s ease;
+}
+
+.blend-btn.active {
+  background-color: var(--espresso);
+  color: var(--paper);
+}
+
+/* Sections Base Styling */
+.section {
+  position: relative;
+  min-height: 100vh;
+  padding: 12vh 6vw 10vh;
+  z-index: 5;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 72px);
+  padding-top: 5vh;
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  width: 100%;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 10;
+}
+
+.hero-pretitle {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-pretitle::after {
+  content: "";
+  flex-grow: 1;
+  max-width: 60px;
+  height: 1px;
+  background-color: var(--copper);
+}
+
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 7.5vw, 6.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--espresso);
+  margin-top: 15px;
+  margin-bottom: 24px;
+}
+
+.hero-tagline {
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  font-weight: 500;
+  color: var(--coffee);
+  line-height: 1.4;
+  margin-bottom: 30px;
+  max-width: 600px;
+}
+
+.hero-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.hero-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  background-color: rgba(216, 185, 155, 0.25);
+  border: 1px solid var(--latte);
+  color: var(--espresso);
+  padding: 6px 14px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-badge::before {
+  content: "✦";
+  color: var(--copper);
+}
+
+.cta-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Tactile Buttons */
+.btn-cafe {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 18px 32px;
+  border-radius: var(--radius);
+  border: 2px solid var(--espresso);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+  position: relative;
+  background-color: var(--paper);
+  color: var(--espresso);
+  box-shadow: 4px 4px 0px var(--espresso);
+}
+
+.btn-cafe-filled {
+  background-color: var(--coffee);
+  color: var(--paper);
+  box-shadow: 4px 4px 0px var(--latte);
+  border-color: var(--espresso);
+}
+
+.btn-cafe:hover, .btn-cafe-filled:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--espresso);
+}
+
+.btn-cafe-filled:hover {
+  box-shadow: 6px 6px 0px var(--latte);
+}
+
+.btn-cafe:active, .btn-cafe-filled:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px var(--espresso);
+}
+
+.btn-cafe-filled:active {
+  box-shadow: 1px 1px 0px var(--latte);
+}
+
+/* FIXED Hero Desk Layout (Elements are beautifully laid out and static) */
+.hero-desk {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tactile-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+.sticky-note {
+  position: relative;
+  width: 260px;
+  padding: 24px;
+  background-color: var(--sticky-bg);
+  box-shadow: 5px 8px 18px var(--shadow);
+  border-radius: 2px;
+  color: var(--sticky-text);
+  transform: rotate(-2deg);
+  z-index: 15;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.sticky-note::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.sticky-note-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--copper);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.sticky-note-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.paper-card {
+  position: relative;
+  width: 270px;
+  padding: 30px 24px;
+  background-color: var(--paper);
+  border: 1px solid rgba(90,64,53,0.15);
+  box-shadow: 8px 12px 25px var(--shadow);
+  border-radius: 4px;
+  transform: rotate(3deg);
+  z-index: 10;
+}
+
+.paper-clip {
+  position: absolute;
+  top: -15px;
+  left: 35px;
+  width: 24px;
+  height: 48px;
+  border: 2.5px solid #8A8D91;
+  border-radius: 12px;
+  background: transparent;
+  z-index: 20;
+  transform: rotate(-10deg);
+}
+
+.paper-clip::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 2.5px solid #8A8D91;
+  border-radius: 10px;
+  border-bottom: none;
+}
+
+.coffee-mug-stain {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px solid var(--latte);
+  opacity: 0.18;
+  filter: blur(0.8px);
+  pointer-events: none;
+  z-index: 2;
+  top: 10%;
+  right: 15%;
+}
+
+/* Scroll Cue */
+.scroll-indicator {
+  position: absolute;
+  bottom: 4vh;
+  left: 6vw;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--mocha);
+  opacity: 0.7;
+}
+
+.scroll-indicator::after {
+  content: "↓";
+  font-weight: bold;
+  animation: bounce 1.8s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* Café Curation Menu Page */
+.menu-contents-section {
+  background-color: var(--paper);
+  border-top: 1px solid rgba(90, 64, 53, 0.12);
+  border-bottom: 1px solid rgba(90, 64, 53, 0.12);
+}
+
+.cafe-menu-board {
+  max-width: 720px;
+  margin: 40px auto 0;
+  background-color: var(--cream);
+  border: 2px solid var(--espresso);
+  border-radius: var(--radius);
+  padding: 50px 40px;
+  box-shadow: 10px 14px 35px var(--shadow);
+  position: relative;
+}
+
+.cafe-menu-board::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px dashed var(--latte);
+  border-radius: calc(var(--radius) - 6px);
+  pointer-events: none;
+}
+
+.menu-header {
+  text-align: center;
+  margin-bottom: 40px;
+  border-bottom: 2px dashed var(--latte);
+  padding-bottom: 24px;
+}
+
+.menu-header h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: var(--espresso);
+}
+
+.menu-header p {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--copper);
+  text-transform: uppercase;
+  margin-top: 6px;
+  letter-spacing: 0.1em;
+}
+
+.menu-category {
+  margin-bottom: 30px;
+}
+
+.menu-category-title {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--mocha);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
+  border-bottom: 1.5px solid var(--espresso);
+  padding-bottom: 6px;
+}
+
+.menu-item-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 20px;
+  transition: transform 0.25s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.menu-item-row:hover {
+  transform: translateX(8px);
+}
+
+.menu-item-left {
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+  background-color: var(--cream);
+  padding-right: 12px;
+}
+
+.menu-item-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--espresso);
+}
+
+.menu-item-desc {
+  font-size: 0.85rem;
+  color: var(--mocha);
+  margin-top: 4px;
+}
+
+.menu-item-dot-leader {
+  flex-grow: 1;
+  border-bottom: 2px dotted var(--latte);
+  margin: 0 8px;
+  align-self: flex-end;
+  position: relative;
+  top: -6px;
+}
+
+.menu-item-price {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--copper);
+  background-color: var(--cream);
+  padding-left: 12px;
+  z-index: 5;
+  white-space: nowrap;
+}
+
+/* Style rules for non-clickable nested sub-items in menu card */
+.menu-sub-list {
+  padding-left: 16px;
+  border-left: 2px dashed var(--latte);
+  margin: 10px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-sub-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.menu-sub-left {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+}
+
+.menu-sub-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--espresso);
+}
+
+.menu-sub-desc {
+  font-size: 0.78rem;
+  color: var(--mocha);
+  margin-top: 2px;
+}
+
+.menu-sub-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--copper);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* About Section Styles */
+.about-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 8%;
+  align-items: flex-start;
+  margin-top: 40px;
+  position: relative;
+}
+
+.eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--copper);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.eyebrow::before {
+  content: "○";
+  font-weight: bold;
+}
+
+.about-headline {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  line-height: 1.15;
+  color: var(--espresso);
+  margin-bottom: 24px;
+}
+
+.about-body {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+
+.about-highlight {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+.about-highlight::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background-color: rgba(216, 185, 155, 0.35);
+  z-index: -1;
+  transform: rotate(-1deg);
+}
+
+.interests-card {
+  background-color: var(--paper);
+  border: 1px solid rgba(90, 64, 53, 0.12);
+  border-radius: var(--radius);
+  padding: 40px;
+  box-shadow: 12px 12px 30px var(--shadow);
+  transform: rotate(1.5deg);
+  position: relative;
+  z-index: 10;
+}
+
+.interests-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--espresso);
+  margin-bottom: 24px;
+  border-bottom: 1px dashed var(--latte);
+  padding-bottom: 12px;
+}
+
+.interests-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.interests-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--coffee);
+}
+
+.interests-item span {
+  font-size: 1.2rem;
+  color: var(--copper);
+}
+
+/* Skills Machine */
+.skills-section {
+  text-align: center;
+  padding-top: 15vh;
+  padding-bottom: 15vh;
+  overflow: visible;
+}
+
+.brewer-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px; /* Forces vertical separation on all responsive screens */
+}
+
+/* Retro Espresso Machine Layout */
+.espresso-machine {
+  width: 320px;
+  height: 380px;
+  position: relative;
+  background-color: #2F3E46; 
+  border: 6px solid var(--espresso);
+  border-radius: 24px 24px 10px 10px;
+  box-shadow: 0 20px 45px rgba(36,24,21,0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  z-index: 30;
+  transition: transform 0.1s ease;
+}
+
+.machine-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.machine-gauge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 4px solid var(--espresso);
+  background-color: var(--paper);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge-needle {
+  position: absolute;
+  width: 2px;
+  height: 18px;
+  background-color: var(--copper);
+  bottom: 50%;
+  left: calc(50% - 1px);
+  transform-origin: bottom center;
+  transform: rotate(-60deg);
+  transition: transform 0.2s ease;
+}
+
+.machine-logo {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--latte);
+  letter-spacing: 0.1em;
+}
+
+.machine-lights {
+  display: flex;
+  gap: 8px;
+}
+
+.machine-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(36, 24, 21, 0.4);
+  border: 2px solid var(--espresso);
+}
+
+.machine-light.active-green {
+  background-color: #8fa87a;
+  box-shadow: 0 0 8px #8fa87a;
+}
+
+.machine-light.active-red {
+  background-color: var(--copper);
+  box-shadow: 0 0 8px var(--copper);
+}
+
+.machine-center {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.portafilter {
+  width: 90px;
+  height: 35px;
+  background-color: var(--espresso);
+  position: relative;
+  border-radius: 4px;
+}
+
+.portafilter-handle {
+  position: absolute;
+  width: 80px;
+  height: 16px;
+  background-color: var(--mocha);
+  border: 3px solid var(--espresso);
+  left: 100%;
+  top: calc(50% - 8px);
+  border-radius: 0 8px 8px 0;
+  transform-origin: left center;
+  transform: rotate(0deg);
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+
+.spout {
+  width: 16px;
+  height: 18px;
+  background-color: var(--espresso);
+  margin: 0 auto;
+  position: relative;
+  border-radius: 0 0 4px 4px;
+}
+
+/* FIXED Coffee stream - pours perfectly to the lip of the cup */
+.coffee-stream {
+  width: 6px;
+  height: 0px;
+  background-color: var(--coffee);
+  position: absolute;
+  left: calc(50% - 3px);
+  top: 100%; 
+  transition: height 0.4s ease;
+  opacity: 0.9;
+  border-radius: 0 0 4px 4px;
+  z-index: 10; 
+}
+
+.coffee-cup {
+  width: 64px;
+  height: 48px;
+  background-color: var(--paper);
+  border: 4px solid var(--espresso);
+  border-radius: 4px 4px 20px 20px;
+  margin-top: 15px;
+  position: relative;
+  overflow: hidden; /* Restricts fill cleanly inside the cup */
+  z-index: 25;
+}
+
+/* Coffee Liquid fill */
+.cup-liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: var(--coffee);
+  transition: height 0.8s ease;
+}
+
+.coffee-cup::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 24px;
+  border: 4px solid var(--espresso);
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  left: 100%;
+  top: 6px;
+}
+
+.steam-group {
+  position: absolute;
+  top: -30px;
+  display: flex;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.steam-puff {
+  width: 10px;
+  height: 25px;
+  background-color: rgba(255,255,255,0.6);
+  filter: blur(4px);
+  border-radius: 50%;
+  animation: floatUp 1.5s infinite linear;
+}
+
+.steam-puff:nth-child(2) { animation-delay: 0.3s; }
+.steam-puff:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-30px) scale(1.3); opacity: 0; }
+}
+
+/* Scroll Reveal: Bounce-in on entering viewport (fires once, not repeated) */
+.reveal-pop {
+  opacity: 0;
+  transform: translateY(36px) scale(0.92) rotate(var(--reveal-rotate, 0deg));
+}
+.reveal-pop.is-visible {
+  animation: revealBounceIn 0.75s cubic-bezier(0.22, 1.4, 0.36, 1) forwards;
+}
+@keyframes revealBounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(36px) scale(0.92) rotate(var(--reveal-rotate, 0deg));
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.03) rotate(var(--reveal-rotate, 0deg));
+  }
+  75% {
+    transform: translateY(3px) scale(0.99) rotate(var(--reveal-rotate, 0deg));
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(var(--reveal-rotate, 0deg));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-pop {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-2px, 3px) rotate(-0.5deg); }
+  40% { transform: translate(2px, -2px) rotate(0.5deg); }
+  60% { transform: translate(-3px, -1px) rotate(-0.5deg); }
+  80% { transform: translate(3px, 2px) rotate(0.5deg); }
+}
+
+.shaking {
+  animation: shake 0.15s infinite;
+}
+
+.brew-btn-container {
+  margin-top: 10px;
+  z-index: 40;
+  position: relative;
+  text-align: center;
+}
+
+.brew-btn {
+  background-color: var(--copper);
+  color: var(--paper);
+  border: 3px solid var(--espresso);
+  border-radius: var(--radius);
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  padding: 20px 44px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--espresso);
+  transition: all 0.1s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brew-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--espresso);
+}
+
+/* FIXED Splash Canvas Area with absolute boundaries and fluid browser scaling values */
+.skills-canvas {
+  position: absolute;
+  top: -80px;
+  left: calc(50% - 500px);
+  width: 1000px;
+  height: 600px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.skill-bean {
+  position: absolute;
+  pointer-events: auto;
+  cursor: grab;
+  background-color: var(--paper);
+  border: 2.5px solid var(--espresso);
+  color: var(--espresso);
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 4px 6px 15px var(--shadow);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  /* Centered perfectly inline at the spout origin of coordinates */
+  left: 50%;
+  top: 240px;
+  transform: translate(-50%, -50%) scale(0);
+  transition: opacity 0.4s ease, left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.15), top 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.15), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  white-space: nowrap;
+}
+
+.skill-bean::before {
+  content: "☕";
+}
+
+.skill-bean:active {
+  cursor: grabbing;
+}
+
+/* Fallback cloud on mobile/small screens so it never overflows off-screen boundaries */
+@media (max-width: 768px) {
+  .skills-canvas {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    padding: 20px 0;
+    left: auto !important;
+    top: auto !important;
+  }
+  .skill-bean {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    opacity: 0;
+    display: none;
+  }
+  .skill-bean.active {
+    display: inline-flex !important;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+}
+
+/* Campaigns & Creative Curation */
+.portfolio-section {
+  background-color: var(--paper);
+  border-top: 1px solid rgba(90, 64, 53, 0.12);
+  border-bottom: 1px solid rgba(90, 64, 53, 0.12);
+}
+
+.portfolio-header {
+  margin-bottom: 60px;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+}
+
+/* Visual Photo-style Portfolio Cards */
+.project-card {
+  background-color: var(--cream);
+  border: 1px solid rgba(90, 64, 53, 0.15);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 6px 8px 20px var(--shadow);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15), box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-8px) rotate(1deg);
+  box-shadow: 15px 20px 35px var(--shadow-strong);
+}
+
+/* Inline, Non-overlapping Project Badges */
+.project-badge-wrapper {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.project-sticker-inline {
+  background-color: var(--olive);
+  color: var(--paper);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.project-client {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--copper);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.project-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--espresso);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.project-summary {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+/* Dual button layout for pehchaan & avani cards */
+.project-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+  border-top: 1px dashed rgba(90, 64, 53, 0.15);
+  padding-top: 16px;
+}
+
+.dual-buttons-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.btn-card-action {
+  flex: 1;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 12px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  border: 1.5px solid var(--espresso);
+}
+
+.btn-case-text {
+  background-color: var(--paper);
+  color: var(--espresso);
+}
+
+.btn-case-text:hover {
+  background-color: var(--espresso);
+  color: var(--paper);
+}
+
+.btn-case-visuals {
+  background-color: var(--latte);
+  color: var(--espresso);
+}
+
+.btn-case-visuals:hover {
+  background-color: var(--coffee);
+  color: var(--paper);
+  border-color: var(--coffee);
+}
+
+/* Large Full-Width Horizontal Feature Slide */
+.project-wide-slide {
+  grid-column: 1 / -1;
+  background-color: var(--cream);
+  border: 1px solid rgba(90, 64, 53, 0.15);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 6px 8px 20px var(--shadow);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.project-wide-slide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--copper);
+}
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.slide-polaroid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Handcrafted Polaroid Casing with static visual gallery text label inside frame */
+.polaroid-preview-interactive {
+  background-color: #fff;
+  padding: 16px 16px 36px;
+  box-shadow: 6px 10px 25px var(--shadow-strong);
+  border: 1px solid rgba(0,0,0,0.06);
+  transform: rotate(var(--slide-rot, -2deg));
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15), box-shadow 0.3s ease;
+  width: 280px;
+  position: relative;
+}
+
+.polaroid-preview-interactive::after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 35%;
+  width: 80px;
+  height: 24px;
+  background-color: rgba(184, 106, 72, 0.2);
+  transform: rotate(1deg);
+}
+
+.polaroid-preview-interactive:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 12px 18px 35px var(--shadow-strong);
+}
+
+.polaroid-inner-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background-color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--latte);
+}
+
+@media (max-width: 900px) {
+  .project-wide-slide {
+    grid-template-columns: 1fr;
+    padding: 28px;
+  }
+}
+
+/* Certifications Cafe Menu Section */
+.certifications-section {
+  padding: 10vh 6vw;
+  background-color: var(--cream);
+  border-bottom: 1px solid rgba(90, 64, 53, 0.1);
+}
+
+.menu-receipt {
+  background-color: var(--paper);
+  border: 1px solid rgba(90, 64, 53, 0.15);
+  border-radius: 8px;
+  max-width: 480px; /* Minimized receipt as requested */
+  margin: 0 auto;
+  padding: 40px;
+  box-shadow: 8px 12px 25px var(--shadow);
+  position: relative;
+}
+
+.menu-receipt::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background-image: linear-gradient(135deg, transparent 4px, var(--paper) 4px), linear-gradient(225deg, transparent 4px, var(--paper) 4px);
+  background-size: 8px 12px;
+}
+
+.receipt-header {
+  text-align: center;
+  border-bottom: 2px dashed var(--latte);
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+.receipt-logo {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--copper);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.receipt-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: var(--espresso);
+  margin-top: 8px;
+}
+
+.receipt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* FIXED Receipt dotted alignment layout properties (Using absolute background lines with relative items) */
+.receipt-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+}
+
+/* Robust background dot filler */
+.receipt-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  border-bottom: 2px dotted var(--latte);
+  z-index: 1;
+}
+
+.receipt-item-left {
+  position: relative;
+  z-index: 2;
+  background-color: var(--paper);
+  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.receipt-item-name {
+  font-weight: 700;
+  color: var(--espresso);
+  font-size: 1.05rem;
+}
+
+.receipt-item-issuer {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--mocha);
+  margin-top: 4px;
+}
+
+.receipt-item-price {
+  position: relative;
+  z-index: 2;
+  background-color: var(--paper);
+  padding-left: 8px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  color: var(--copper);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
+/* Lightbox overlay for project view */
+#projectLightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(36, 24, 21, 0.94);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  backdrop-filter: blur(6px);
+}
+
+.lightbox-content {
+  background-color: var(--paper);
+  color: var(--text);
+  border-radius: var(--radius);
+  max-width: 920px; 
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 44px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+}
+
+#projectLightbox.open {
+  display: flex;
+}
+
+#projectLightbox.open .lightbox-content {
+  transform: scale(1);
+}
+
+.close-lightbox {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--espresso);
+  color: var(--paper);
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  z-index: 50;
+}
+
+.close-lightbox:hover {
+  background-color: var(--copper);
+}
+
+/* FLEX WIREFRAME CAROUSEL CONTAINER */
+.creative-scroller {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 20px 10px;
+  scroll-snap-type: x mandatory;
+  border-radius: 8px;
+  background: rgba(36, 24, 21, 0.03);
+}
+
+/* Smartphone Mock (9:16 Aspect) */
+.mock-reel-smartphone {
+  flex: 0 0 210px;
+  aspect-ratio: 9/16;
+  background-color: var(--espresso);
+  border-radius: 28px;
+  border: 4px solid var(--espresso);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  scroll-snap-align: start;
+}
+
+.mock-reel-smartphone::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: calc(50% - 30px);
+  width: 60px;
+  height: 12px;
+  background-color: #000;
+  border-radius: 999px;
+  z-index: 5;
+}
+
+.mock-reel-inner {
+  width: 100%;
+  height: 100%;
+  background-color: var(--coffee);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  color: #fff;
+  position: relative;
+}
+
+.mock-play-button {
+  width: 38px;
+  height: 38px;
+  background-color: rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: calc(50% - 19px);
+  left: calc(50% - 19px);
+  backdrop-filter: blur(4px);
+}
+
+.mock-play-button::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 10px solid #fff;
+  margin-left: 3px;
+}
+
+.mock-reel-header {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--latte);
+  letter-spacing: 0.08em;
+}
+
+.mock-reel-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mock-timeline {
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.3);
+  position: relative;
+  border-radius: 999px;
+}
+
+.mock-timeline-fill {
+  width: 45%;
+  height: 100%;
+  background: var(--copper);
+  border-radius: 999px;
+}
+
+/* Instagram Carousel Block (1:1 Aspect) */
+.mock-insta-post {
+  flex: 0 0 250px;
+  aspect-ratio: 1/1;
+  background-color: var(--paper);
+  border: 1.5px solid rgba(90, 64, 53, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.mock-insta-dots {
+  display: flex;
+  gap: 4px;
+  position: absolute;
+  bottom: 12px;
+  left: calc(50% - 14px);
+}
+
+.mock-insta-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--latte);
+  border-radius: 50%;
+}
+
+.mock-insta-dot.active {
+  background-color: var(--copper);
+}
+
+.mock-insta-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--copper);
+}
+
+.mock-insta-body {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.82rem;
+  color: var(--espresso);
+  font-weight: bold;
+}
+
+.mock-insta-footer {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  opacity: 0.6;
+}
+
+/* Contact Details */
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  width: 100%;
+  gap: 60px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.quiet-heading {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 4.5vw, 4.2rem);
+  line-height: 1.1;
+  color: var(--espresso);
+  margin-bottom: 24px;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.contact-item {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  color: var(--espresso);
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 2px solid rgba(90, 64, 53, 0.15);
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.contact-item:hover {
+  color: var(--copper);
+  border-bottom-color: var(--copper);
+  transform: translateX(6px);
+}
+
+.contact-note {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--mocha);
+  max-width: 320px;
+  line-height: 1.5;
+  opacity: 0.8;
+  position: relative;
+  padding-left: 20px;
+}
+
+.contact-note::before {
+  content: "☕";
+  position: absolute;
+  left: 0;
+}
+
+.editorial-badge {
+  background-color: var(--paper);
+  border: 1px dashed var(--latte);
+  padding: 30px;
+  border-radius: var(--radius);
+  transform: rotate(-1.5deg);
+  box-shadow: 6px 8px 18px var(--shadow);
+}
+
+.editorial-badge-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--copper);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.editorial-badge-body {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.footer {
+  border-top: 1px solid rgba(90, 64, 53, 0.1);
+  padding: 40px 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--mocha);
+  background-color: var(--cream);
+}
+
+@media (max-width: 1024px) {
+  .hero-layout, .about-grid, .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero-desk {
+    height: 480px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 3.2rem;
+  }
+  .skills-section {
+    padding-top: 8vh;
+    padding-bottom: 8vh;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Background Watermarks -->
+<div class="bg-doodles">
+  <div class="coffee-ring" style="width: 280px; height: 275px; top: 12%; right: 10%;"></div>
+  <div class="coffee-ring" style="width: 180px; height: 182px; bottom: 8%; left: 3%;"></div>
+</div>
+
+<!-- Sticky Nav Bar -->
+<nav class="nav-bar">
+  <a href="#home" class="nav-logo">HARSHITA</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#certs">Certs</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right-wrap">
+    <!-- Roast Switcher Control System -->
+    <div class="blend-selector-pill" id="blendSelector">
+      <button class="blend-btn active" data-blend="flatwhite">Flat White</button>
+      <button class="blend-btn" data-blend="americano">Americano</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="section hero-section" id="home">
+  <div class="hero-layout">
+    <div class="hero-text">
+      <span class="hero-pretitle">Creative Portfolio</span>
+      <!-- Title Wrapper context with correctly z-indexed and absolutely sized visual stories arrow -->
+      <div style="position: relative; display: inline-block;">
+        <h1 class="hero-title">Harshita<br>Kathuria</h1>
+        <span class="handwritten-arrow" style="position: absolute; top: -15px; right: 0; transform: rotate(10deg);">[ visual stories ] ↴</span>
+      </div>
+      <p class="hero-tagline">Creating thoughtful content with a thing for good design.</p>
+      
+      <div class="hero-tags-container">
+        <span class="hero-badge">Content Design</span>
+        <span class="hero-badge">Social Media</span>
+        <span class="hero-badge">PR &amp; Marketing</span>
+      </div>
+      
+      <div class="cta-group">
+        <a href="#projects" class="btn-cafe btn-cafe-filled">View Projects</a>
+        <a href="#contact" class="btn-cafe">Say Hello</a>
+      </div>
+    </div>
+    
+    <!-- Desk Layout -->
+    <div class="hero-desk">
+      <div class="coffee-mug-stain"></div>
+      
+      <div class="tactile-container">
+        <!-- Sticky Note -->
+        <div class="sticky-note" id="stickyNoteObj">
+          <div class="sticky-note-title">Daily Note</div>
+          <p class="sticky-note-text">"The magic is always hidden inside the details." ☕✏️</p>
+        </div>
+        
+        <!-- Pinned Card -->
+        <div class="paper-card" id="paperCardObj">
+          <div class="paper-clip"></div>
+          <div class="sticky-note-title">Curriculum</div>
+          <p class="sticky-note-text" style="font-size: 0.85rem; margin-top: 6px; font-family:'Space Mono', monospace;">
+            BA (Hons.) Sociology<br>
+            Janki Devi Memorial College<br>
+            University of Delhi<br>
+            ----------------<br>
+            Delhi, India
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="scroll-indicator">Scroll down</div>
+</section>
+
+<!-- Curation Menu contents section moved BEFORE About Section as requested -->
+<section class="section menu-contents-section" id="menu">
+  <span class="eyebrow">Curation Menu</span>
+  <h2 class="about-headline" style="text-align: center; margin-bottom: 12px;">The Blend Guide</h2>
+  <p class="about-body" style="max-width: 580px; margin: 0 auto 30px; text-align: center; font-size: 1.1rem;">
+    Every role, project, and skill curated like custom roastery profiles. Click any card listing to jump directly down to its canvas!
+  </p>
+
+  <div class="cafe-menu-board">
+    <div class="menu-header">
+      <h3>The Creative Menu</h3>
+      <p>Fine visual blends · Delhi, India</p>
+    </div>
+
+    <!-- The Craft Specialties Column -->
+    <div class="menu-category">
+      <div class="menu-category-title">01. Specialties &amp; Extras</div>
+      
+      <a href="#about" class="menu-item-row">
+        <div class="menu-item-left">
+          <span class="menu-item-title">Profile Context</span>
+          <span class="menu-item-desc">A little about me and what I enjoy making.</span>
+        </div>
+        <div class="menu-item-dot-leader"></div>
+        <span class="menu-item-price">[ About Me ]</span>
+      </a>
+
+      <a href="#skills" class="menu-item-row">
+        <div class="menu-item-left">
+          <!-- Removed "Interactive" from Skills Brewer title as requested -->
+          <span class="menu-item-title">Skills Brewer</span>
+          <span class="menu-item-desc">A fun way to explore the skills behind the work.</span>
+        </div>
+        <div class="menu-item-dot-leader"></div>
+        <span class="menu-item-price">[ Barista Special ]</span>
+      </a>
+    </div>
+
+    <!-- The Campaigns & Projects Column - Modified so only the main heading block is clickable, preserving descriptive layout parts underneath as static items -->
+    <div class="menu-category">
+      <div class="menu-category-title">02. Campaigns &amp; Slices</div>
+
+      <!-- Single main clickable heading block for Projects -->
+      <a href="#projects" class="menu-item-row" style="margin-bottom: 16px;">
+        <div class="menu-item-left">
+          <span class="menu-item-title" style="font-size:1.35rem; color: var(--copper);">Campaigns &amp; Projects</span>
+          <span class="menu-item-desc" style="font-weight:700;">A collection of projects from internships, college, and a few ideas I couldn't resist making.</span>
+        </div>
+        <div class="menu-item-dot-leader"></div>
+        <span class="menu-item-price" style="font-weight: 700;">[ View All Work ]</span>
+      </a>
+
+      <!-- Sub Parts detailing every single project - Non-clickable nested list preserving the descriptive texts -->
+      <div class="menu-sub-list">
+        <div class="menu-sub-item">
+          <div class="menu-sub-left">
+            <span class="menu-sub-title">✦ Pehchaan the street school</span>
+            <span class="menu-sub-desc">Social media, marketing, outreach, and campaign creatives.</span>
+          </div>
+          <span class="menu-sub-tag">[ SMM Roast ]</span>
+        </div>
+
+        <div class="menu-sub-item">
+          <div class="menu-sub-left">
+            <span class="menu-sub-title">✦ Avani Social Content</span>
+            <span class="menu-sub-desc">Social media content for an environmental student club.</span>
+          </div>
+          <span class="menu-sub-tag">[ Eco Infusion ]</span>
+        </div>
+
+        <div class="menu-sub-item">
+          <div class="menu-sub-left">
+            <span class="menu-sub-title">✦ SOCH Department Magazine</span>
+            <span class="menu-sub-desc">Editorial layouts for the department magazine.</span>
+          </div>
+          <span class="menu-sub-tag">[ Editorial Pour ]</span>
+        </div>
+
+        <div class="menu-sub-item">
+          <div class="menu-sub-left">
+            <span class="menu-sub-title">✦ Artisanal Café Identity</span>
+            <span class="menu-sub-desc">Self-Initiated Concept — Brand guidelines, wax stamps, Takeaway menus.</span>
+          </div>
+          <span class="menu-sub-tag">[ Spec Draft ]</span>
+        </div>
+
+        <div class="menu-sub-item">
+          <div class="menu-sub-left">
+            <span class="menu-sub-title">✦ Aesthetic Collages &amp; Reels</span>
+            <span class="menu-sub-desc">Personal Curation — Paper scrapbooks, retro film overlays, and travel journals.</span>
+          </div>
+          <span class="menu-sub-tag">[ Scrapbook Filter ]</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Credentials Column -->
+    <div class="menu-category">
+      <div class="menu-category-title">03. Verified Side Orders</div>
+
+      <a href="#certs" class="menu-item-row">
+        <div class="menu-item-left">
+          <span class="menu-item-title">Coursework &amp; Certifications</span>
+          <span class="menu-item-desc">Digital Marketing, SEO, SMM Fundamentals, and Critical Thinking credentials.</span>
+        </div>
+        <div class="menu-item-dot-leader"></div>
+        <span class="menu-item-price">[ Verified Receipt ]</span>
+      </a>
+
+      <a href="#contact" class="menu-item-row">
+        <div class="menu-item-left">
+          <span class="menu-item-title">Say Hello!</span>
+          <span class="menu-item-desc">Open for Entry-Level opportunities, partner Visual edits, and coffees.</span>
+        </div>
+        <div class="menu-item-dot-leader"></div>
+        <span class="menu-item-price">[ Signature Cup ]</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="section about-section" id="about">
+  <div class="about-grid">
+    <div>
+      <span class="eyebrow">About Me</span>
+      <h2 class="about-headline">Sociology grad. Content designer. Slightly obsessed with scrapbooking.</h2>
+      <p class="about-body">
+        I enjoy turning ideas into content that's thoughtful, clear, and visually engaging. Whether it's a social media post, a campaign, or an editorial layout, I like finding the simplest way to tell the story.
+        <br><br>
+        Design gradually became the part of the process I enjoyed the most. <span class="about-highlight">Sociology</span> gave me a foundation in understanding people and communication, while <span class="about-highlight">content design</span> became the space where I found myself bringing those ideas to life visually.
+        <br><br>
+        Most days you'll find me somewhere between Canva, Pinterest boards, travel inspiration, and a scrapbook that probably didn't need one more page&hellip; but got one anyway.
+      </p>
+      
+      <div class="editorial-badge">
+        <div class="editorial-badge-title">Profile Summary</div>
+        <!-- Profile summary shortened and kept distinct from about-headline -->
+        <div class="editorial-badge-body" style="font-size: 0.9rem;">
+          Sociology graduate who picked up social media strategy, Canva design, and video editing while interning across three different marketing teams.
+        </div>
+      </div>
+    </div>
+    
+    <div>
+      <div class="interests-card">
+        <h3 class="interests-title">Interests &amp; Specialties</h3>
+        <ul class="interests-list">
+          <li class="interests-item"><span>✦</span> Content Design (Canva)</li>
+          <li class="interests-item"><span>✦</span> Social Media Aesthetics</li>
+          <li class="interests-item"><span>✦</span> PR &amp; Media Relations</li>
+          <li class="interests-item"><span>✦</span> Audience Tracking</li>
+          <li class="interests-item"><span>✦</span> Editorial Layout Curation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Espresso Skills Brewer Machine -->
+<section class="section skills-section" id="skills">
+  <span class="eyebrow">Skills</span>
+  <h2 class="about-headline" style="text-align: center; margin-bottom: 12px;">The Skills Brewer</h2>
+  <p class="about-body" style="max-width: 580px; margin: 0 auto 40px; text-align: center; font-size: 1rem;">
+    Tap the portafilter handle (or just hit the button) to brew a quick shot of my layout, design, and content skills.
+  </p>
+  
+  <div class="brewer-wrap">
+    <!-- Exploding Skill Beans Canvas Area -->
+    <div class="skills-canvas" id="skillsCanvas">
+      <!-- Spawned dynamically in random scattered positions outside central machine area -->
+    </div>
+    
+    <!-- Retro espresso machine UI -->
+    <div class="espresso-machine" id="espressoMachine">
+      <div class="machine-top">
+        <div class="machine-gauge">
+          <div class="gauge-needle" id="gaugeNeedle"></div>
+        </div>
+        <span class="machine-logo">BREW-O-MATIC</span>
+        <div class="machine-lights">
+          <div class="machine-light active-green" id="lightGreen"></div>
+          <div class="machine-light" id="lightRed"></div>
+        </div>
+      </div>
+      
+      <div class="machine-center">
+        <!-- Steam elements -->
+        <div class="steam-group" id="steamGroup">
+          <div class="steam-puff"></div>
+          <div class="steam-puff"></div>
+          <div class="steam-puff"></div>
+        </div>
+        
+        <div class="portafilter" id="portafilter">
+          <div class="portafilter-handle" id="portafilterHandle"></div>
+        </div>
+        <div class="spout">
+          <div class="coffee-stream" id="coffeeStream"></div>
+        </div>
+        <div class="coffee-cup" id="coffeeCup">
+          <!-- Filled Liquid Area inside cup -->
+          <div class="cup-liquid" id="cupLiquid"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Brew Button & Caption: Absolutely underneath the machine container -->
+    <div class="brew-btn-container">
+      <button class="brew-btn" id="brewBtn" style="margin: 0 auto;">
+        <span>BREW MY SKILLS</span> ☕
+      </button>
+      <span style="display:block; margin-top:16px; font-family:'Space Mono', monospace; font-size:0.85rem; color:var(--mocha); opacity:0.85;">...and more skills are waiting to get brewed!</span>
+    </div>
+  </div>
+</section>
+
+<!-- Campaigns & Creative Curation -->
+<section class="section portfolio-section" id="projects">
+  <div class="portfolio-header">
+    <span class="eyebrow">Visual Curation</span>
+    <h2 class="about-headline">Campaigns &amp; Creative Curation</h2>
+    <p class="about-body" style="max-width: 600px;">
+      A closer look at what I've actually built — real case studies, with the visuals to back them up.
+    </p>
+  </div>
+  
+  <div class="portfolio-grid">
+    <!-- Project 1: Pehchaan SMM & PR (Corrected Trust title & clean layout) -->
+    <article class="project-card">
+      <div class="project-badge-wrapper">
+        <span class="project-sticker-inline">Pehchaan the street school</span>
+      </div>
+      <span class="project-client">Completed Internships</span>
+      <h3 class="project-title">Social Media &amp; PR Curation</h3>
+      <p class="project-summary">Planned social media content, edited reels, supported PR activities, and helped organize marketing material for the trust's campaigns.</p>
+      
+      <div class="project-actions">
+        <div class="dual-buttons-row">
+          <button class="btn-card-action btn-case-text" onclick="openLightbox('pehchaan_case')">Read Case Study</button>
+          <button class="btn-card-action btn-case-visuals" onclick="openLightbox('pehchaan_gallery')">Visual Gallery</button>
+        </div>
+      </div>
+    </article>
+    
+    <!-- Project 3: Avani Environmental Club -->
+    <article class="project-card">
+      <div class="project-badge-wrapper">
+        <span class="project-sticker-inline">Completed Extracurricular</span>
+      </div>
+      <span class="project-client">The Environmental Club</span>
+      <h3 class="project-title">Social Media for Campus Initiatives</h3>
+      <p class="project-summary">Designed Instagram posts and stories for Avani's environmental campaigns while keeping the content clear, consistent, and easy to engage with.</p>
+      
+      <div class="project-actions">
+        <div class="dual-buttons-row">
+          <button class="btn-card-action btn-case-text" onclick="openLightbox('avani_case')">Read Case Study</button>
+          <button class="btn-card-action btn-case-visuals" onclick="openLightbox('avani_gallery')">Visual Gallery</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 2: SOCH Department Magazine (Promoted to elegant full screen slide with detailed content) -->
+    <div class="project-wide-slide">
+      <div class="slide-content">
+        <span class="project-sticker-inline" style="margin-bottom: 12px;">Janki Devi Memorial College</span>
+        <h3 class="project-title" style="font-size: 2rem;">SOCH Magazine Design</h3>
+        
+        <!-- Deep, consistent case study copy detailed in the open -->
+        <p class="project-summary" style="margin-bottom: 12px; font-weight: 500;">
+          As Page Designer for SOCH, I laid out the magazine's editorial spreads to match each issue's theme.
+        </p>
+        <p class="project-summary" style="font-size: 0.88rem; opacity: 0.8; margin-bottom: 20px;">
+          Turned dense academic research into clean, readable Canva layouts — keeping the typography consistent enough that it reads the same whether it's printed or on a screen.
+        </p>
+      </div>
+      
+      <div class="slide-polaroid-container">
+        <!-- Interactive Polaroid styled button containing simply "Visual Gallery" in the white frame -->
+        <div class="polaroid-preview-interactive" onclick="openLightbox('soch_gallery')" style="--slide-rot: 3deg;">
+          <div class="polaroid-inner-placeholder" style="background-color: #ECE5DC;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--espresso)" stroke-width="1.5"><path d="M12 2L2 22h20L12 2z"/></svg>
+          </div>
+          <div class="polaroid-caption">Visual Gallery</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4: Self-Initiated Concept Spec Project -->
+    <div class="project-wide-slide">
+      <div class="slide-content">
+        <span class="project-sticker-inline" style="margin-bottom: 12px;">Self-Initiated Concept</span>
+        <h3 class="project-title" style="font-size: 2rem;">Artisanal Café Identity</h3>
+        
+        <p class="project-summary" style="margin-bottom: 12px; font-weight: 500;">
+          A self-initiated brand identity for an imagined artisanal coffee house — packaging, stickers, signage, the whole thing.
+        </p>
+        <p class="project-summary" style="font-size: 0.88rem; opacity: 0.8; margin-bottom: 20px;">
+          Designed the stationery, menus, and paper bag mockups on Canva, mostly to see how a small hospitality brand could hold together end to end.
+        </p>
+      </div>
+      
+      <div class="slide-polaroid-container">
+        <!-- Interactive Polaroid styled button containing simply "Visual Gallery" in the white frame -->
+        <div class="polaroid-preview-interactive" onclick="openLightbox('spec_gallery')" style="--slide-rot: 2deg;">
+          <div class="polaroid-inner-placeholder" style="background-color: #ECE5DC;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--espresso)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="polaroid-caption">Visual Gallery</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 5: Personal / Scrapbook Visual Showcase -->
+    <div class="project-wide-slide">
+      <div class="slide-content">
+        <span class="project-sticker-inline" style="margin-bottom: 12px;">Personal Curation</span>
+        <h3 class="project-title" style="font-size: 2rem;">Aesthetic Collages &amp; Reels</h3>
+        
+        <p class="project-summary" style="margin-bottom: 12px; font-weight: 500;">
+          No client. Just curiosity. Paper scrapbooks, travel-journal layouts, and a lot of experimenting with framing.
+        </p>
+        <p class="project-summary" style="font-size: 0.88rem; opacity: 0.8; margin-bottom: 20px;">
+          Mostly me arranging stamps, textures, and handwritten notes until a layout finally felt right — probably rearranging the same page for the fifth time.
+        </p>
+      </div>
+      
+      <div class="slide-polaroid-container">
+        <!-- Interactive Polaroid styled button containing simply "Visual Gallery" in the white frame -->
+        <div class="polaroid-preview-interactive" onclick="openLightbox('personal_gallery')" style="--slide-rot: -2deg;">
+          <div class="polaroid-inner-placeholder" style="background-color: #FEF9D9;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--olive)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <div class="polaroid-caption">Visual Gallery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Certifications Menu Section -->
+<section class="section certifications-section" id="certs">
+  <div class="menu-receipt">
+    <div class="receipt-header">
+      <span class="receipt-logo">Course Menu</span>
+      <h3 class="receipt-title">Coursework &amp; Certs</h3>
+    </div>
+    
+    <div class="receipt-list">
+      <div class="receipt-item">
+        <div class="receipt-item-left">
+          <span class="receipt-item-name">Digital Marketing</span>
+          <span class="receipt-item-issuer">LernX</span>
+        </div>
+        <div class="receipt-item-dot"></div>
+        <span class="receipt-item-price">Verified</span>
+      </div>
+      
+      <div class="receipt-item">
+        <div class="receipt-item-left">
+          <span class="receipt-item-name">SEO &amp; SMM Fundamentals</span>
+          <span class="receipt-item-issuer">IIDE</span>
+        </div>
+        <div class="receipt-item-dot"></div>
+        <span class="receipt-item-price">Verified</span>
+      </div>
+      
+      <div class="receipt-item">
+        <div class="receipt-item-left">
+          <span class="receipt-item-name">Marketing for Beginners</span>
+          <span class="receipt-item-issuer">JDM College, University of Delhi</span>
+        </div>
+        <div class="receipt-item-dot"></div>
+        <span class="receipt-item-price">Verified</span>
+      </div>
+      
+      <div class="receipt-item">
+        <div class="receipt-item-left">
+          <span class="receipt-item-name">Sociology of Media</span>
+          <span class="receipt-item-issuer">JDM College, University of Delhi</span>
+        </div>
+        <div class="receipt-item-dot"></div>
+        <span class="receipt-item-price">Course</span>
+      </div>
+
+      <div class="receipt-item">
+        <div class="receipt-item-left">
+          <span class="receipt-item-name">Critical Thinking</span>
+          <span class="receipt-item-issuer">JDM College, University of Delhi</span>
+        </div>
+        <div class="receipt-item-dot"></div>
+        <span class="receipt-item-price">Course</span>
+      </div>
+    </div>
+    
+    <!-- Beautiful normal-dimensioned picture mockup layout for showcase of certificates -->
+    <div style="width: 100%; aspect-ratio: 1.414 / 1; background-color: var(--paper); border: 2.5px solid var(--espresso); border-radius: 6px; box-shadow: 4px 6px 15px rgba(0,0,0,0.06); padding: 18px; margin-top: 32px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; position: relative;">
+      <!-- Watermark Border Inside -->
+      <div style="position: absolute; inset: 6px; border: 1px double var(--latte); border-radius: 4px; pointer-events: none;"></div>
+      
+      <div style="font-family: 'Space Mono', monospace; font-size: 0.62rem; color: var(--copper); letter-spacing: 0.1em; text-transform: uppercase; z-index: 2;">Janki Devi Memorial College</div>
+      
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; z-index: 2; text-align: center;">
+        <span style="font-size: 2.2rem; filter: grayscale(1); opacity: 0.85;">📜</span>
+        <span style="font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--espresso); letter-spacing: -0.02em; text-transform: uppercase;">Certificate of Accolade</span>
+        <span style="font-size: 0.72rem; color: var(--mocha); max-width: 80%; line-height: 1.3;">Academic Excellence &amp; Critical Thinking Certifications</span>
+      </div>
+      
+      <div style="font-family: 'Space Mono', monospace; font-size: 0.6rem; color: var(--olive); font-weight: bold; z-index: 2;">[ credentials verified ]</div>
+    </div>
+  </div>
+</section>
+
+<!-- Pop-up Modal Lightbox -->
+<div id="projectLightbox">
+  <div class="lightbox-content">
+    <button class="close-lightbox" id="closeLightboxBtn">&times;</button>
+    <span class="project-client" id="lbClient">Classification</span>
+    <h2 class="about-headline" id="lbTitle" style="margin-top:10px; margin-bottom:15px;">Case Title</h2>
+    
+    <div id="lbBodyContainer" style="font-size:1rem; line-height: 1.6; max-height: 60vh; overflow-y: auto; padding-right:10px;">
+      <!-- Filled dynamically -->
+    </div>
+  </div>
+</div>
+
+<!-- Contact Section -->
+<section class="section contact-section" id="contact">
+  <div class="contact-layout">
+    <div>
+      <span class="eyebrow">Let's Connect</span>
+      <h2 class="quiet-heading">Let's make<br>something worth<br>remembering.</h2>
+      
+      <div class="contact-links">
+        <a href="mailto:kharshita1015@gmail.com" class="contact-item">kharshita1015@gmail.com ✉</a>
+        <a href="tel:+919205968476" class="contact-item">+91 9205968476 📞</a>
+        <a href="https://linkedin.com" target="_blank" class="contact-item">LinkedIn ↗</a>
+      </div>
+    </div>
+    
+    <div>
+      <div style="display: flex; flex-direction: column; gap: 30px;">
+        <div class="editorial-badge" style="transform: rotate(1deg);">
+          <div class="editorial-badge-title">Availability</div>
+          <div class="editorial-badge-body" style="font-size: 0.95rem;">
+            Delhi-based. Open for entry-level opportunities in content design, social media, PR, and marketing. Hoping to be part of conversations that begin with, 'I have an idea.'
+          </div>
+        </div>
+        
+        <p class="contact-note">
+          Made with too much coffee and an unreasonable amount of curiosity.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-credits">© 2026 Harshita Kathuria</div>
+  <div>Social Media &amp; Content Marketing Portfolio</div>
+</footer>
+
+<script>
+// Visual layouts for Flat White (medium) & Americano (dark) roast profiles
+const blendProfiles = {
+  flatwhite: {
+    '--espresso': '#241815',
+    '--coffee': '#3A2925',
+    '--mocha': '#5A4035',
+    '--latte': '#D8B99B',
+    '--cream': '#F8F4EE',
+    '--copper': '#B86A48',
+    '--olive': '#7D8068',
+    '--paper': '#FFFDF9',
+    '--text': '#2D221D',
+    '--shadow': 'rgba(36, 24, 21, 0.1)',
+    '--shadow-strong': 'rgba(36, 24, 21, 0.2)',
+    '--nav-bg': 'rgba(248, 244, 238, 0.96)',
+    '--sticky-bg': '#FEF9D9',
+    '--sticky-text': '#2D221D'
+  },
+  americano: {
+    '--espresso': '#FFFDF9',
+    '--coffee': '#D8B99B',
+    '--mocha': '#F8F4EE',
+    '--latte': '#634E45',
+    '--cream': '#1F1512',
+    '--copper': '#E08560',
+    '--olive': '#9BA084',
+    '--paper': '#2E1E1B',
+    '--text': '#FDFBF7',
+    '--shadow': 'rgba(0, 0, 0, 0.4)',
+    '--shadow-strong': 'rgba(0, 0, 0, 0.6)',
+    '--nav-bg': 'rgba(31, 21, 18, 0.96)',
+    '--sticky-bg': '#4A3D1F',
+    '--sticky-text': '#FBF3D8'
+  }
+};
+
+// Toggle Blend Profile logic
+document.querySelectorAll('.blend-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.blend-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const blendKey = btn.getAttribute('data-blend');
+    const profile = blendProfiles[blendKey];
+    
+    if (profile) {
+      for (const [property, value] of Object.entries(profile)) {
+        document.documentElement.style.setProperty(property, value);
+      }
+    }
+  });
+});
+
+// Verified Case & Gallery data structures
+const contentData = {
+  pehchaan_case: {
+    client: "Pehchaan the street school (Trust)",
+    title: "SMM & PR Internship Insights",
+    body: `
+      <h3>Responsibilities</h3>
+      <p style="margin-bottom:14px; margin-top:8px;">At Pehchaan, I worked on the trust's social media and communication efforts. My work included planning content, editing reels, writing captions, creating marketing material, and supporting day to day PR activities.</p>
+      
+      <h3>What I Worked On</h3>
+      <p style="margin-bottom:14px; margin-top:8px;">One of the reels I edited crossed <strong>17K+ views</strong> organically. As part of the PR initiative, I also brought a graphic designer on board to contribute educational creatives for the trust.</p>
+      
+      <h3>Takeaway</h3>
+      <p style="margin-bottom:14px; margin-top:8px;">This internship taught me how much planning goes into even a simple social media post.</p>
+    `
+  },
+  pehchaan_gallery: {
+    client: "Pehchaan the street school",
+    title: "SMM & PR Creatives Gallery",
+    body: `
+      <div class="gallery-slide-container" style="display:flex; justify-content:center; align-items:center;">
+        <!-- Single beautiful Polaroid of 9:16 dimension (Reel size) -->
+        <div class="polaroid-frame" style="--rot: -2deg; width: 260px;">
+          <div class="polaroid-image-placeholder" style="aspect-ratio: 9/16; background-color: var(--coffee); display: flex; flex-direction:column; justify-content:space-between; padding:16px; color:#fff;">
+            <div style="font-family:'Space Mono', monospace; font-size:0.65rem; color:var(--latte); letter-spacing:0.08em; text-transform:uppercase;">PEHCHAAN TRUST REEL</div>
+            <div style="width: 44px; height: 44px; background-color: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; align-self:center; backdrop-filter: blur(4px);">
+              <div style="width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid #fff; margin-left: 3px;"></div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size: 0.6rem; opacity: 0.8;">Duration: 0:15 [17K+ Views]</span>
+              <div style="width:100%; height:3px; background:rgba(255,255,255,0.3); border-radius:999px; position:relative;"><div style="width:45%; height:100%; background:var(--copper); border-radius:999px;"></div></div>
+            </div>
+          </div>
+          <div class="polaroid-caption">Viral Organic Reel Creative [9:16]</div>
+        </div>
+      </div>
+    `
+  },
+  avani_case: {
+    client: "Avani: The Environmental Club",
+    title: "Eco-Branding Strategy Case",
+    body: `
+      <h3>Responsibilities</h3>
+      <p style="margin-bottom:14px; margin-top:8px;">I designed Instagram posts, story sequences, and promotional content for Avani's environmental campaigns, events, and student initiatives. The focus was to make information easy to understand while keeping the visuals consistent.</p>
+      
+      <h3>What I Worked On</h3>
+      <p style="margin-bottom:14px; margin-top:8px;">I worked on layouts that matched each campaign's theme and helped maintain a consistent visual identity.</p>
+
+      <h3>Takeaway</h3>
+      <p style="margin-bottom:14px; margin-top:8px;">This project showed me how thoughtful design can make everyday communication more engaging.</p>
+    `
+  },
+  avani_gallery: {
+    client: "The Environmental Club",
+    title: "Avani Campaign Showcase",
+    body: `
+      <div class="gallery-slide-container" style="display:flex; justify-content:center; align-items:center;">
+        <!-- Single beautiful Polaroid of 1:1 dimension (Insta post size) -->
+        <div class="polaroid-frame" style="--rot: 1.5deg; width: 280px;">
+          <div class="polaroid-image-placeholder" style="aspect-ratio: 1/1; background-color: #E6E8E3; display: flex; flex-direction:column; justify-content:space-between; padding:18px; color:var(--espresso);">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--copper); font-weight:700;">
+              <span>AVANI EVENT POST</span>
+              <span>1/1</span>
+            </div>
+            <div style="font-family:'Manrope', sans-serif; font-size:0.85rem; font-weight:bold; color:var(--espresso); line-height:1.4;">Sustainable swap-shop flyer mock designed on Canva using hand-drawn earth style guidelines.</div>
+            <div style="font-family:'Space Mono', monospace; font-size:0.6rem; opacity:0.6;">Grid Layout Mockup</div>
+          </div>
+          <div class="polaroid-caption">Aesthetic Instagram Post [1:1]</div>
+        </div>
+      </div>
+    `
+  },
+  soch_case: {
+    client: "SOCH Department Magazine",
+    title: "SOCH Layout Case Analysis",
+    body: `
+      <h3>Responsibilities &amp; Scope</h3>
+      <p style="margin-bottom:14px; margin-top:8px;">I was Page Designer for SOCH, the sociology department's official magazine — laying out each issue's pages.</p>
+      
+      <h3>Key Milestones</h3>
+      <p style="margin-bottom:14px; margin-top:8px;">Took dense academic writing and turned it into layouts people would actually want to read, while keeping the typography and colors consistent across every page.</p>
+    `
+  },
+  soch_gallery: {
+    client: "SOCH Editorial Layout Showcase",
+    title: "SOCH Page Layouts",
+    body: `
+      <div class="creative-scroller">
+        <!-- Post Mock #1 (1:1) -->
+        <div class="mock-insta-post" style="background-color: #FFFDF9; border: 1.5px solid var(--latte);">
+          <div class="mock-insta-header" style="color: var(--espresso);">
+            <span>MAGAZINE PAGE 01</span>
+            <span>SPREAD</span>
+          </div>
+          <div style="font-family: 'Syne', sans-serif; font-size: 0.8rem; border-bottom: 1.5px solid var(--espresso); padding-bottom: 4px; font-weight: 800;">SOCH EDITORIAL</div>
+          <div class="mock-insta-body" style="font-size: 0.65rem; line-height: 1.3;">A spread built around dense academic research, kept clean and easy to follow.</div>
+          <div class="mock-insta-footer">Layout Mock 01</div>
+        </div>
+
+        <!-- Post Mock #2 (1:1) -->
+        <div class="mock-insta-post" style="background-color: #FFFDF9; border: 1.5px solid var(--latte);">
+          <div class="mock-insta-header" style="color: var(--espresso);">
+            <span>MAGAZINE PAGE 02</span>
+            <span>SPREAD</span>
+          </div>
+          <div style="font-family: 'Syne', sans-serif; font-size: 0.8rem; border-bottom: 1.5px solid var(--espresso); padding-bottom: 4px; font-weight: 800;">CULTURE INDEX</div>
+          <div class="mock-insta-body" style="font-size: 0.65rem; line-height: 1.3;">A sociology segment exploring spatial mapping and modern urban life.</div>
+          <div class="mock-insta-footer">Layout Mock 02</div>
+        </div>
+
+        <!-- Post Mock #3 (1:1) -->
+        <div class="mock-insta-post" style="background-color: #FFFDF9; border: 1.5px solid var(--latte);">
+          <div class="mock-insta-header" style="color: var(--espresso);">
+            <span>MAGAZINE PAGE 03</span>
+            <span>SPREAD</span>
+          </div>
+          <div style="font-family: 'Syne', sans-serif; font-size: 0.8rem; border-bottom: 1.5px solid var(--espresso); padding-bottom: 4px; font-weight: 800;">CONTRIBUTORS</div>
+          <div class="mock-insta-body" style="font-size: 0.65rem; line-height: 1.3;">Contributor spotlight pages, kept airy with plenty of white space.</div>
+          <div class="mock-insta-footer">Layout Mock 03</div>
+        </div>
+
+        <!-- Post Mock #4 (1:1) -->
+        <div class="mock-insta-post" style="background-color: #FFFDF9; border: 1.5px solid var(--latte);">
+          <div class="mock-insta-header" style="color: var(--espresso);">
+            <span>MAGAZINE PAGE 04</span>
+            <span>SPREAD</span>
+          </div>
+          <div style="font-family: 'Syne', sans-serif; font-size: 0.8rem; border-bottom: 1.5px solid var(--espresso); padding-bottom: 4px; font-weight: 800;">SOCIOLOGICAL INDEX</div>
+          <div class="mock-insta-body" style="font-size: 0.65rem; line-height: 1.3;">Index pages mapping out the research structure, footnotes and all.</div>
+          <div class="mock-insta-footer">Layout Mock 04</div>
+        </div>
+      </div>
+    `
+  },
+  spec_gallery: {
+    client: "Boutique Café Concept Spec Gallery",
+    title: "Packaging Mocks & Stamped Logotypes",
+    body: `
+      <div class="creative-scroller">
+        <!-- Reel Mock #1 (9:16) -->
+        <div class="mock-reel-smartphone">
+          <div class="mock-reel-inner" style="background-color: var(--coffee);">
+            <div class="mock-reel-header">COFFEE BREWING PROCESS</div>
+            <div class="mock-play-button"></div>
+            <div class="mock-reel-footer">
+              <span style="font-size: 0.55rem; opacity: 0.8;">Duration: 0:15</span>
+              <div class="mock-timeline"><div class="mock-timeline-fill" style="width: 40%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reel Mock #2 (9:16) -->
+        <div class="mock-reel-smartphone">
+          <div class="mock-reel-inner" style="background-color: var(--mocha);">
+            <div class="mock-reel-header">CAFE INTERIORS REEL</div>
+            <div class="mock-play-button"></div>
+            <div class="mock-reel-footer">
+              <span style="font-size: 0.55rem; opacity: 0.8;">Duration: 0:20</span>
+              <div class="mock-timeline"><div class="mock-timeline-fill" style="width: 50%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post Mock #1 (1:1) -->
+        <div class="mock-insta-post" style="background-color: #ECE5DC;">
+          <div class="mock-insta-header">
+            <span>CAFE MOCKUP 01</span>
+            <span>1/3</span>
+          </div>
+          <div class="mock-insta-body">Takeaway paper packaging design with rustic stamped cafe insignia mockup frame.</div>
+          <div class="mock-insta-footer">Packaging Guide</div>
+        </div>
+
+        <!-- Post Mock #2 (1:1) -->
+        <div class="mock-insta-post" style="background-color: #ECE5DC;">
+          <div class="mock-insta-header">
+            <span>CAFE MOCKUP 02</span>
+            <span>2/3</span>
+          </div>
+          <div class="mock-insta-body">Minimalist printed menu mock using classic serif hierarchy and high tactile contrast grids.</div>
+          <div class="mock-insta-footer">Menu Details</div>
+        </div>
+
+        <!-- Post Mock #3 (1:1) -->
+        <div class="mock-insta-post" style="background-color: #ECE5DC;">
+          <div class="mock-insta-header">
+            <span>CAFE MOCKUP 03</span>
+            <span>3/3</span>
+          </div>
+          <div class="mock-insta-body">modular stationery stickers designed to print for artisanal packaging elements.</div>
+          <div class="mock-insta-footer">Details Card</div>
+        </div>
+      </div>
+    `
+  },
+  personal_gallery: {
+    client: "Personal Creative Playground Gallery",
+    title: "Tactile Collage Sheets & Analog Diaries",
+    body: `
+      <div class="creative-scroller">
+        <!-- Reel Mock #1 (9:16) -->
+        <div class="mock-reel-smartphone">
+          <div class="mock-reel-inner" style="background-color: #3C4238;">
+            <div class="mock-reel-header">SCRAPBOOK JOURNAL VLOG</div>
+            <div class="mock-play-button"></div>
+            <div class="mock-reel-footer">
+              <span style="font-size: 0.55rem; opacity: 0.8;">Duration: 0:15</span>
+              <div class="mock-timeline"><div class="mock-timeline-fill" style="width: 30%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reel Mock #2 (9:16) -->
+        <div class="mock-reel-smartphone">
+          <div class="mock-reel-inner" style="background-color: #423531;">
+            <div class="mock-reel-header">TRAVEL MOODBOARD EDIT</div>
+            <div class="mock-play-button"></div>
+            <div class="mock-reel-footer">
+              <span style="font-size: 0.55rem; opacity: 0.8;">Duration: 0:20</span>
+              <div class="mock-timeline"><div class="mock-timeline-fill" style="width: 65%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post Mock #1 (1:1) -->
+        <div class="mock-insta-post" style="background-color: #FEF9D9;">
+          <div class="mock-insta-header">
+            <span>SCRAPBOOK COLLAGE 01</span>
+            <span>JOURNAL</span>
+          </div>
+          <div class="mock-insta-body">Aesthetic analog collage mock using modular train ticket stamps, dried floral details, and hand-scrawled text grids.</div>
+          <div class="mock-insta-footer">Scrapbook Spread #1</div>
+        </div>
+
+        <!-- Post Mock #2 (1:1) -->
+        <div class="mock-insta-post" style="background-color: #FEF9D9;">
+          <div class="mock-insta-header">
+            <span>SCRAPBOOK COLLAGE 02</span>
+            <span>JOURNAL</span>
+          </div>
+          <div class="mock-insta-body">Retro lofi-grain story cover art styled with warm paper background textures and vintage film parameters.</div>
+          <div class="mock-insta-footer">Scrapbook Spread #2</div>
+        </div>
+
+        <!-- Post Mock #3 (1:1) -->
+        <div class="mock-insta-post" style="background-color: #FEF9D9;">
+          <div class="mock-insta-header">
+            <span>SCRAPBOOK COLLAGE 03</span>
+            <span>JOURNAL</span>
+          </div>
+          <div class="mock-insta-body">Personal curation moodboard layout mapping lifestyle snaps and aesthetic design elements.</div>
+          <div class="mock-insta-footer">Scrapbook Spread #3</div>
+        </div>
+      </div>
+    `
+  }
+};
+
+// CV-Matched Skills Array
+const skillsData = [
+  "Canva Design",
+  "Social Media Mgmt",
+  "InShot Editing",
+  "Research & Planning",
+  "SEO & SMM Basics",
+  "Basic Video Editing",
+  "Media Outreach",
+  "Audience Analysis"
+];
+
+// Pre-calculated organic splash offsets to prevent overlapping machine center
+// Adjusted "Research & Planning" and "Audience Analysis" to expand extremely outward
+const splashOffsets = [
+  // Left Side Scatter Set - Pushed extremely far to avoid machine overlap
+  { x: -460, y: -120, rot: -12 },
+  { x: -310, y: -30,  rot: 10 },
+  { x: -430, y: 110,  rot: -8 },
+  { x: -510, y: 235,  rot: 15 }, // "Research & Planning" (Index 3) splatters extremely far leftwards as requested!
+  
+  // Right Side Scatter Set - Pushed extremely far to avoid machine overlap
+  { x: 460,  y: -120, rot: 12 },
+  { x: 310,  y: -30,  rot: -10 },
+  { x: 430,  y: 110,  rot: 8 },
+  { x: 495,  y: 230,  rot: -15 }  // "Audience Analysis" (Index 7) splatters extremely far rightwards!
+];
+
+// Espresso Skills Brewer Engine
+const brewBtn = document.getElementById('brewBtn');
+const machine = document.getElementById('espressoMachine');
+const portafilterHandle = document.getElementById('portafilterHandle');
+const coffeeStream = document.getElementById('coffeeStream');
+const steamGroup = document.getElementById('steamGroup');
+const gaugeNeedle = document.getElementById('gaugeNeedle');
+const lightRed = document.getElementById('lightRed');
+const lightGreen = document.getElementById('lightGreen');
+const skillsCanvas = document.getElementById('skillsCanvas');
+const cupLiquid = document.getElementById('cupLiquid');
+
+let isBrewed = false;
+let activeBeans = [];
+
+function brewSkills() {
+  if (isBrewed) {
+    isBrewed = false;
+    
+    portafilterHandle.style.transform = "rotate(0deg)";
+    gaugeNeedle.style.transform = "rotate(-60deg)";
+    
+    lightRed.classList.remove('active-red');
+    lightGreen.classList.add('active-green');
+    
+    // Suck liquid out of the cup and stop stream
+    cupLiquid.style.height = "0%";
+    coffeeStream.style.height = "0px";
+    
+    activeBeans.forEach((bean, idx) => {
+      setTimeout(() => {
+        bean.style.transition = "opacity 0.4s ease, left 0.5s ease, top 0.5s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
+        bean.style.left = "50%";
+        bean.style.top = "240px";
+        bean.style.transform = "translate(-50%, -50%) scale(0)"; 
+        bean.style.opacity = "0";
+      }, idx * 40);
+    });
+    
+    setTimeout(() => {
+      skillsCanvas.innerHTML = "";
+      activeBeans = [];
+    }, 700);
+    
+    return;
+  }
+  
+  isBrewed = true;
+  
+  machine.classList.add('shaking');
+  portafilterHandle.style.transform = "rotate(-40deg)";
+  gaugeNeedle.style.transform = "rotate(45deg)";
+  lightGreen.classList.remove('active-green');
+  lightRed.classList.add('active-red');
+  
+  steamGroup.style.opacity = "1";
+  
+  // Animate coffee pouring precisely to the top lip of the cup
+  setTimeout(() => {
+    coffeeStream.style.height = "38px"; 
+  }, 200);
+  
+  // Scale up cup liquid height cleanly
+  setTimeout(() => {
+    cupLiquid.style.height = "85%";
+  }, 400);
+  
+  // Transition beans to organic non-overlapping splash locations
+  setTimeout(() => {
+    machine.classList.remove('shaking');
+    steamGroup.style.opacity = "0.4";
+    coffeeStream.style.height = "0px"; // turn off stream once full
+    
+    skillsCanvas.innerHTML = "";
+    activeBeans = [];
+    
+    skillsData.forEach((skill, index) => {
+      const coord = splashOffsets[index];
+      
+      const bean = document.createElement('div');
+      bean.className = 'skill-bean';
+      bean.innerText = skill;
+      
+      // Spawn inside the canvas frame centered near the spout initially
+      bean.style.left = "50%";
+      bean.style.top = "240px";
+      bean.style.transform = "translate(-50%, -50%) scale(0)";
+      bean.style.opacity = "0";
+      
+      skillsCanvas.appendChild(bean);
+      activeBeans.push(bean);
+      
+      void bean.offsetWidth;
+      
+      setTimeout(() => {
+        bean.classList.add('active');
+        bean.style.opacity = "1";
+        // Calculate transition coordinates outwards
+        bean.style.left = `calc(50% + ${coord.x}px)`;
+        bean.style.top = `${240 + coord.y}px`;
+        bean.style.transform = `translate(-50%, -50%) scale(1) rotate(${coord.rot}deg)`;
+      }, index * 80);
+    });
+    
+  }, 1200);
+}
+
+brewBtn.addEventListener('click', brewSkills);
+portafilterHandle.addEventListener('click', brewSkills);
+
+// Portfolio Lightbox Open/Close Tactics
+const portfolioLightbox = document.getElementById('projectLightbox');
+const closeLightboxBtn = document.getElementById('closeLightboxBtn');
+const lbClient = document.getElementById('lbClient');
+const lbTitle = document.getElementById('lbTitle');
+const lbBodyContainer = document.getElementById('lbBodyContainer');
+
+function openLightbox(dataKey) {
+  const data = contentData[dataKey];
+  if (data) {
+    lbClient.innerText = data.client;
+    lbTitle.innerText = data.title;
+    lbBodyContainer.innerHTML = data.body;
+    
+    portfolioLightbox.classList.add('open');
+    document.body.style.overflow = "hidden";
+  }
+}
+
+closeLightboxBtn.addEventListener('click', () => {
+  portfolioLightbox.classList.remove('open');
+  document.body.style.overflow = "auto";
+});
+
+portfolioLightbox.addEventListener('click', (e) => {
+  if (e.target === portfolioLightbox) {
+    portfolioLightbox.classList.remove('open');
+    document.body.style.overflow = "auto";
+  }
+});
+
+// Scroll Reveal: elements pop in with a little bounce as they enter view.
+// Each element only ever animates once — it stays put after that, no repeat bouncing.
+(function initScrollReveal() {
+  const revealSelectors = [
+    '.hero-badge', '.editorial-badge', '.sticky-note', '.paper-card',
+    '.polaroid-frame', '.project-card', '.menu-category', '.contact-item',
+    '.receipt-item', '.interests-item', '.brewer-wrap', '.about-headline',
+    '.eyebrow', '.machine-light'
+  ];
+
+  const targets = Array.from(document.querySelectorAll(revealSelectors.join(',')));
+
+  // Stagger elements that share the same parent so groups cascade in slightly,
+  // rather than every element popping at the exact same instant.
+  const staggerCounts = new Map();
+  targets.forEach(el => {
+    // Preserve any existing tilt/rotation set inline so the bounce doesn't flatten it
+    const inlineTransform = el.style.transform || '';
+    const rotateMatch = inlineTransform.match(/rotate\([^)]+\)/);
+    el.style.setProperty('--reveal-rotate', rotateMatch ? rotateMatch[0].replace('rotate(', '').replace(')', '') : '0deg');
+
+    el.classList.add('reveal-pop');
+    const parent = el.parentElement;
+    const count = staggerCounts.get(parent) || 0;
+    staggerCounts.set(parent, count + 1);
+    el.style.animationDelay = Math.min(count * 70, 280) + 'ms';
+  });
+
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target); // fires once, never repeats
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -8% 0px'
+  });
+
+  targets.forEach(el => revealObserver.observe(el));
+})();
+// Nav Links: reveal only once the user has scrolled past the Curation Menu section
+(function initNavLinksReveal() {
+  const navLinks = document.getElementById('navLinks');
+  const menuSection = document.getElementById('menu');
+  if (!navLinks || !menuSection) return;
+
+  const checkPosition = (entries) => {
+    entries.forEach(entry => {
+      // Menu section has scrolled fully above the viewport -> show links
+      // Menu section is still visible or below the viewport -> hide links
+      if (entry.boundingClientRect.bottom < 0) {
+        navLinks.classList.add('is-visible');
+      } else {
+        navLinks.classList.remove('is-visible');
+      }
+    });
+  };
+
+  if ('IntersectionObserver' in window) {
+    const navRevealObserver = new IntersectionObserver(checkPosition, { threshold: 0 });
+    navRevealObserver.observe(menuSection);
+  }
+})();
+</script>
+</body>
+</html>
